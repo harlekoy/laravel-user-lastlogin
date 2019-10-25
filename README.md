@@ -16,6 +16,12 @@ You can install the package via composer:
 composer require harlekoy/laravel-user-lastlogin
 ```
 
+## Publish assets
+
+```bash
+php artisan vendor:publish --tag=lastlogin.config
+php artisan vendor:publish --tag=lastlogin.migrations
+```
 ## Usage
 
 ``` php
