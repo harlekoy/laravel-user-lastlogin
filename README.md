@@ -107,21 +107,21 @@ class MarkAsLoggedIn
 
 Update `app/Providers/EventServiceProvider.php`
 
-```php
-/**
- * The event listener mappings for the application.
- *
- * @var array
- */
-protected $listen = [
-    Registered::class => [
-        SendEmailVerificationNotification::class,
-        MarkAsLoggedIn::class,
-    ],
-    LoggedIn::class => [
-        MarkAsLoggedIn::class,
-    ],
-];
+```diff
+ /**
+  * The event listener mappings for the application.
+  *
+  * @var array
+  */
+ protected $listen = [
+     Registered::class => [
+         SendEmailVerificationNotification::class,
++        MarkAsLoggedIn::class,
+     ],
++    LoggedIn::class => [
++        MarkAsLoggedIn::class,
++    ],
+ ];
 ```
 
 Add or update your `authenticated` method in `app/Http/Controllers/Auth/LoginController.php` file on your Laravel app
