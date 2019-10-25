@@ -4,7 +4,7 @@ namespace Spatie\Skeleton;
 
 use Illuminate\Support\ServiceProvider;
 
-class SkeletonServiceProvider extends ServiceProvider
+class LastLoginServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -15,6 +15,10 @@ class SkeletonServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('skeleton.php'),
             ], 'config');
+
+            $this->publishes([
+                __DIR__.'/../database/migrations/create_logins_tables.php.stub' => $this->getMigrationFileName($filesystem),
+            ], 'migrations');
 
             /*
             $this->loadViewsFrom(__DIR__.'/../resources/views', 'skeleton');

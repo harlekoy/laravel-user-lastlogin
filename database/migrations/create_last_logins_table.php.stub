@@ -1,0 +1,49 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateLastLoginsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        // This will add the `last_login_id` in the users table
+        Schema::table(config('lastlogin.user_table_name'),
+            function (Blueprint $table) {
+                $table->integer('last_login_id');
+            }
+        );
+
+        // This will create the `logins` table
+        Schema::create(config('lastlogin.table_name'), function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->string('ip_address');
+            $table->timestamp('created_at');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        // Remove the `last_login_id` in the users table
+        Schema::table(config('lastlogin.user_table_name'),
+            function (Blueprint $table) {
+                $table->dropColumn('last_login_id');
+            }
+        );
+
+        // Drop the `logins` table
+        Schema::drop(config('lastlogin.table_name'));
+    }
+}
