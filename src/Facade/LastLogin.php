@@ -1,13 +1,13 @@
 <?php
 
-namespace Spatie\Skeleton;
+namespace Harlekoy\LastLogin;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Spatie\Skeleton\SkeletonClass
+ * @see \Harlekoy\LastLogin\SkeletonClass
  */
-class SkeletonFacade extends Facade
+class LastLogin extends Facade
 {
     /**
      * Get the registered name of the component.

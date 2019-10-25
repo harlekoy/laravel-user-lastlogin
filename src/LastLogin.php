@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\Skeleton;
+namespace Harlekoy\LastLogin;
 
-class SkeletonClass
+class LastLogin
 {
     /**
      * Create a new Skeleton Instance.

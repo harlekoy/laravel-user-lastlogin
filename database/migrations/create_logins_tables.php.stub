@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLastLoginsTable extends Migration
+class CreateLoginsTables extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ class CreateLastLoginsTable extends Migration
         // This will add the `last_login_id` in the users table
         Schema::table(config('lastlogin.user_table_name'),
             function (Blueprint $table) {
-                $table->integer('last_login_id');
+                $table->bigInteger('last_login_id')->nullable();
             }
         );
 
