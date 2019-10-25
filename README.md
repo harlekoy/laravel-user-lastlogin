@@ -1,4 +1,4 @@
-# Very short description of the package
+# Users last login
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/harlekoy/laravel-user-lastlogin.svg?style=flat-square)](https://packagist.org/packages/harlekoy/laravel-user-lastlogin)
 [![Build Status](https://img.shields.io/travis/harlekoy/laravel-user-lastlogin/master.svg?style=flat-square)](https://travis-ci.org/harlekoy/laravel-user-lastlogin)
