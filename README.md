@@ -41,6 +41,105 @@ $user->lastLogin
 
 You can access directly the list of user logins just go to `/logins`
 
+### Listen When User Login
+
+Create first the login event
+
+```php
+<?php
+
+namespace App\Events;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class LoggedIn
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * @var \App\User
+     */
+    public $user;
+
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($user)
+    {
+        $this->user = $user;
+    }
+}
+```
+
+Create the listener
+
+```php
+<?php
+
+namespace App\Listeners;
+
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+
+class MarkAsLoggedIn
+{
+    /**
+     * Handle the event.
+     *
+     * @param  object  $event
+     * @return void
+     */
+    public function handle($event)
+    {
+        $event->user->logins()
+            ->create(['ip_address' => request()->ip()]);
+    }
+}
+```
+
+Update `app/Providers/EventServiceProvider.php`
+
+```php
+/**
+ * The event listener mappings for the application.
+ *
+ * @var array
+ */
+protected $listen = [
+    Registered::class => [
+        SendEmailVerificationNotification::class,
+        MarkAsLoggedIn::class,
+    ],
+    LoggedIn::class => [
+        MarkAsLoggedIn::class,
+    ],
+];
+```
+
+Add or update your `authenticated` method in `app/Http/Controllers/Auth/LoginController.php` file on your Laravel app
+
+```php
+/**
+ * The user has been authenticated.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @param  mixed  $user
+ * @return mixed
+ */
+protected function authenticated(Request $request, $user)
+{
+    event(new LoggedIn($user));
+}
+```
+
 ### Testing
 
 ``` bash
