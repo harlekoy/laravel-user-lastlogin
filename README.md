@@ -16,7 +16,7 @@ You can install the package via composer:
 composer require harlekoy/laravel-user-lastlogin
 ```
 
-## Publish assets
+### Publish assets
 
 ```bash
 php artisan vendor:publish --tag=lastlogin.config
@@ -37,7 +37,7 @@ $user->logins()->create(['ip_address' => request()->id()]);
 $user->lastLogin
 ```
 
-## Admin
+### Admin
 
 You can access directly the list of user logins just go to `/logins`
 
