@@ -1,6 +1,6 @@
 <?php
 
-namespace Harlekoy\LastLogin;
+namespace Harlekoy\LastLogin\Facade;
 
 use Illuminate\Support\Facades\Facade;
 
