@@ -14,8 +14,13 @@ class LoginController extends Controller
      */
     public function index()
     {
+        $logins = Login::with('user')
+            ->latest()
+            ->limit(config('lastlogin.limit'))
+            ->get();
+
         return view('lastlogin::layout', [
-            'logins' => Login::with('user')->latest()->get(),
+            'logins' => $logins,
         ]);
     }
 }
